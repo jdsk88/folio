@@ -6,7 +6,7 @@ import SignUp from './components/signup';
 import LabelBottomNavigation from './components/bnav';
 import PrimarySearchAppBar from "./components/appBar";
 import TransferList from "./components/tasks/tasks";
-import { Products } from "./components/products/products";
+import { Products } from "./components/products/index";
 const App = () => {
   return (
     <div className="App">

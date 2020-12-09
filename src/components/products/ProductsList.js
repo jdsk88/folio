@@ -13,7 +13,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Categories from "./categories";
 import { useStyles } from "./useStyles.1";
 
 
@@ -25,7 +24,6 @@ export const ProductsList = ({ products }) => {
     };
     return (
         <>
-            <Categories />
             {products.map((product) => (
                 <Card className={classes.root} key={product._id}>
 
