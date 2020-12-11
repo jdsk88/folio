@@ -6,7 +6,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Typography } from '@material-ui/core';
-import { useStyles } from "./useStyles"
+import { useStyles } from "./styles_categories"
 
 export default function ToggleButtons() {
   const [filter, setFilter] = React.useState('');

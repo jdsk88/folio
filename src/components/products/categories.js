@@ -2,7 +2,7 @@ import React from 'react';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import { coffee, electronics, food, health, drugs, skateboarding, snowboarding, bmx, yoga, clothes, pets } from './icons'
-import { useStyles } from './useStyles';
+import { useStyles } from './styles_categories';
 import { Link } from "react-router-dom";
 
 export default function Categories() {

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, Route, useEffect } from "react";
 import { Router, Switch, useLocation } from "react-router-dom";
 import Categories from "./categories";
 import { ProductsList } from "./ProductsList";
 import Loader from "../small_components/loader";
-import { useStyles } from "./useStyles";
+import { useStyles } from "./styles_categories"
 import ToggleButtons from "./toggle2btns";
 
 export const Products = () => {
@@ -31,13 +31,9 @@ export const Products = () => {
 
     return (
         <div>
-            <Categories className={classes.categories}/>
+            <Categories className={classes.categories} />
             <ToggleButtons />
-            <Router>
-            <Switch>
-<Route component />            <ProductsList products={products} />
-            </Switch>
-            </Router>
+            <ProductsList products={products} />
         </div>
     );
 
