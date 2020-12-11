@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
   root: {
     maxWidth: '100vw',
+    height: '64px',
     position: "absolute",
     top: '64px',
     left: '0px',
@@ -10,38 +11,56 @@ export const useStyles = makeStyles({
     zIndex: 1,
     overflowX: 'scroll',
     justifyContent: 'flex-start',
+  }, 
+  categories: {
+    position: 'fixed',
+    top:"64px",
+    left:"0px"
   },
-  coffe:{
+  coffe: {
     borderBottom: 'solid brown 3px',
   },
-  electronics:{
+  electronics: {
     borderBottom: 'solid black 3px',
   },
-  food:{
+  food: {
     borderBottom: 'solid green 3px',
   },
-  health:{
+  health: {
     borderBottom: 'solid red 3px',
   },
-  skate:{
+  skate: {
     borderBottom: 'solid blue 3px',
   },
-  snow:{
+  snow: {
     borderBottom: 'solid lightblue 3px',
   },
-  bmx:{
+  bmx: {
     borderBottom: 'solid purple 3px',
   },
-  yoga:{
+  yoga: {
     borderBottom: 'solid orange 3px',
   },
-  clothes:{
+  clothes: {
     borderBottom: 'solid lightblue 3px',
   },
-  pets:{
+  pets: {
     borderBottom: 'solid pink 3px',
   },
-  drugs:{
+  drugs: {
     borderBottom: 'solid pink 3px',
+  },
+  filterBox:{
+    width: '100vw',
+    position: 'absolute',
+    zIndex: 1,
+    top: '128px',
+    left: '0px',
+  },
+  filter: {
+    width: '50vw',
+  },
+  search: {
+    width: '16.666vw',
   },
 });

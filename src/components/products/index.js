@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { useLocation } from "react-router-dom";
+import { Router, Switch, useLocation } from "react-router-dom";
 import Categories from "./categories";
 import { ProductsList } from "./ProductsList";
-import Loader from "../small_components/loader" 
+import Loader from "../small_components/loader";
+import { useStyles } from "./useStyles";
+import ToggleButtons from "./toggle2btns";
 
 export const Products = () => {
+    const classes = useStyles();
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const queryParams = new URLSearchParams(useLocation().search);
@@ -17,21 +19,25 @@ export const Products = () => {
             name: queryParams.get("name") || '',
         });
         setIsLoading(true);
-        // fetch("http://192.168.0.16:8080/api/products?")
-        //     .then((resp) => resp.json())
-        //     .then((data) => setProducts(data))
-        //     .finally(() => setIsLoading(false));
-        axios("http://192.168.0.16:8080/api/products?")
+        fetch("http://192.168.0.16:8080/api/products?")
+            .then((resp) => resp.json())
+            .then((data) => setProducts(data))
+            .finally(() => setIsLoading(false));
     }, []);
 
     if (isLoading) {
-        return <Loader/>;
+        return <Loader />;
     }
 
     return (
         <div>
-            <Categories />
-            <ProductsList products={products} />
+            <Categories className={classes.categories}/>
+            <ToggleButtons />
+            <Router>
+            <Switch>
+<Route component />            <ProductsList products={products} />
+            </Switch>
+            </Router>
         </div>
     );
 

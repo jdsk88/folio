@@ -3,12 +3,11 @@ import { red } from '@material-ui/core/colors';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100vw',
-        left: 0,
-        right: 0,
+        width: '100%',
         marginTop: '56px',
         marginBottom: '56px',
         zIndex: 1,
+        boxSizing: "border-box",
     },
     media: {
         height: 0,

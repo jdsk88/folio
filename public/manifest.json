@@ -3,25 +3,25 @@
   "name": "iSter-Smart-Business-Manager",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "atom.gif",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/gif"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
+      "src": "atom.gif",
+      "type": "image/gif",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
+      "src": "atom.gif",
+      "type": "image/gif",
       "sizes": "512x512"
     }
   ],
   "start_url": "/welcome",
   "display": "fullscreen",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "background_color": "black",
   "orientation": "portrait",
   "kiosk_enabled" : true,
   "kiosk_only" : true

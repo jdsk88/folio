@@ -23,7 +23,7 @@ export const ProductsList = ({ products }) => {
         setExpanded(!expanded);
     };
     return (
-        <>
+        <div>
             {products.map((product) => (
                 <Card className={classes.root} key={product._id}>
 
@@ -82,6 +82,6 @@ export const ProductsList = ({ products }) => {
                     </Collapse>
                 </Card>
             ))}
-        </>
+        </ div>
     );
 };
