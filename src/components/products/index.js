@@ -1,10 +1,10 @@
-import React, { useState, Route, useEffect } from "react";
-import { Router, Switch, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Categories from "./categories";
 import { ProductsList } from "./ProductsList";
 import Loader from "../small_components/loader";
 import { useStyles } from "./styles_categories"
-import ToggleButtons from "./toggle2btns";
+import Filters from "./toggle2btns";
 
 export const Products = () => {
     const classes = useStyles();
@@ -19,11 +19,12 @@ export const Products = () => {
             name: queryParams.get("name") || '',
         });
         setIsLoading(true);
-        fetch("http://192.168.0.16:8080/api/products?")
+        fetch("http://185.161.95.77:33733/api/drugs?limit=1&page=3/api/products?" + params.toString())
             .then((resp) => resp.json())
             .then((data) => setProducts(data))
             .finally(() => setIsLoading(false));
     }, []);
+    console.log(products)
 
     if (isLoading) {
         return <Loader />;
@@ -32,8 +33,8 @@ export const Products = () => {
     return (
         <div>
             <Categories className={classes.categories} />
-            <ToggleButtons />
-            <ProductsList products={products} />
+            <Filters />
+            {/* <ProductsList products={products} /> */}
         </div>
     );
 

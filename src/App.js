@@ -7,6 +7,9 @@ import LabelBottomNavigation from './components/bnav';
 import PrimarySearchAppBar from "./components/appBar";
 import TransferList from "./components/tasks/tasks";
 import { Products } from "./components/products/index";
+import { DrugsStore } from "./components/drugs/index-old";
+import {Drugs} from "./components/drugs/index";
+import {Brightness} from "./components/settings/index"
 const App = () => {
   return (
     <div className="App">
@@ -20,6 +23,10 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           <Route path="/tasks" component={TransferList} />
           <Route path="/products" component={Products} />
+          <Route path="/drugs" component={DrugsStore} />
+          <Route path="/rxdrugs" component={Drugs} />
+          <Route path="/rxdrugs" component={Drugs} />
+          <Route path="/settings" component={Brightness} />
         </Switch>
         <LabelBottomNavigation />
       </Router>

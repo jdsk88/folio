@@ -4,7 +4,7 @@ import { red } from '@material-ui/core/colors';
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        marginTop: '56px',
+        marginTop: '112px',
         marginBottom: '56px',
         zIndex: 1,
         boxSizing: "border-box",

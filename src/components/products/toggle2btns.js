@@ -8,7 +8,7 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { Typography } from '@material-ui/core';
 import { useStyles } from "./styles_categories"
 
-export default function ToggleButtons() {
+const Filters = () => {
   const [filter, setFilter] = React.useState('');
   const [sort, setSort] = React.useState('');
   const [sortAZ, setSortAZ] = React.useState('');
@@ -95,3 +95,4 @@ export default function ToggleButtons() {
     </div>
   );
 }
+export default Filters

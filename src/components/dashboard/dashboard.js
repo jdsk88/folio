@@ -23,6 +23,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import SimpleBottomNavigation from './dashNav';
+import { Counter } from '../examples/counter';
 
 function Copyright() {
   return (
@@ -151,6 +152,11 @@ export default function Dashboard() {
               </Paper>
             </Grid>
           </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Counter />
+              </Paper>
+            </Grid>
         </Container>
       </main>
     </div>

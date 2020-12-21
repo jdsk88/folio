@@ -1,162 +1,75 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import React, { useState } from "react";
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        margin: 'auto',
-        marginTop: '64px',
-        marginBottom: '64px',
-        width: '95vw',
-    },
-    paper: {
-        width: '95vw',
-        height: 'max-content',
-        boxSizing: 'border-box',
-        // marginLeft: '2.5vw',
-        // marginRight: '2.5vw',
-        overflowX: 'hidden',
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  Collapse
+} from "@material-ui/core";
 
-    },
-    button: {
-        // margin: theme.spacing(0.5, 0),
-    },
-}));
+const myData = [
+  {
+    id: "1",
+    nameHeader: "Header1",
+    subMenu: [{ id: "1", name: "subMenu1" }, { id: "2", name: "subMenu2" }]
+  },
+  {
+    id: "2",
+    nameHeader: "Header2",
+    subMenu: [{ id: "1", name: "subMenu1" }, { id: "2", name: "subMenu2" }]
+  },
+  {
+    id: "3",
+    nameHeader: "Header3",
+    subMenu: [{ id: "1", name: "subMenu1" }, { id: "2", name: "subMenu2" }]
+  }
+];
 
-function not(a, b) {
-    return a.filter((value) => b.indexOf(value) === -1);
-}
+const CollapseBTN = () => {
+  const [state, setState] = useState({ settings: [{ id: "1", open: false }, { id: "2", open: false }, { id: "3", open: false }] });
 
-function intersection(a, b) {
-    return a.filter((value) => b.indexOf(value) !== -1);
-}
+  const handleClick = id => {
+    setState(state => ({
+      ...state,
+      settings: state.settings.map(item =>
+        item.id === id ? { ...item, open: !item.open } : item
+      )
+    }));
+  };
 
-export default function TransferList() {
-    const classes = useStyles();
-    const [checked, setChecked] = React.useState([]);
-    const [disabled, setDisabled] = React.useState([]);
-    const [left, setLeft] = React.useState([0, 1, 2, 3]);
-    const [right, setRight] = React.useState([4, 5, 6, 7]);
-
-    const leftChecked = intersection(checked, left);
-    const rightChecked = intersection(checked, right);
-
-    const handleToggle = (value) => () => {
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setChecked(newChecked);
-    };
-
-    const handleAllRight = () => {
-        setRight(right.concat(left));
-        setLeft([]);
-    };
-
-    const handleCheckedRight = () => {
-        setRight(right.concat(leftChecked));
-        setLeft(not(left, leftChecked));
-        setChecked(checked, leftChecked);
-        setDisabled(disabled,leftChecked);
-    };
-
-    const handleCheckedLeft = () => {
-        setLeft(left.concat(rightChecked));
-        setRight(not(right, rightChecked));
-        setChecked(not(checked, rightChecked));
-    };
-
-    const handleAllLeft = () => {
-        setLeft(left.concat(right));
-        setRight([]);
-    };
-
-    const customList = (items) => (
-        <Paper className={classes.paper}>
-            <List dense component="div" role="list">
-                {items.map((value) => {
-                    const labelId = `transfer-list-item-${value}-label`;
-
-                    return (
-                        <ListItem key={value} role="listitem" button onClick={handleToggle(value)}>
-                            <ListItemIcon>
-                                <Checkbox
-                                    checked={checked.indexOf(value) !== -1}
-                                    tabIndex={-1}
-                                    disableRipple
-                                    inputProps={{ 'aria-labelledby': labelId }}
-                                />
-                            </ListItemIcon>
-                            <ListItemText id={labelId} primary={`List item ${value + 1}`} />
-                        </ListItem>
-                    );
-                })}
-                <ListItem />
-            </List>
-        </Paper>
-    );
-
+ 
+    const { settings } = state;
     return (
-        <Grid container spacing={2} justify="center" alignItems="center" className={classes.root}>
-            <Grid item>{customList(left)}</Grid>
-            <Grid item>
-                <Grid container direction="row" alignItems="center">
-                    <Button
-                        variant="outlined"
-                        size="small"
-                        className={classes.button}
-                        onClick={handleAllRight}
-                        disabled={left.length === 0}
-                        aria-label="move all right"
-                    >
-                        ≫
-          </Button>
-                    <Button
-                        variant="outlined"
-                        size="small"
-                        className={classes.button}
-                        onClick={handleCheckedRight}
-                        disabled={leftChecked.length === 0}
-                        aria-label="move selected right"
-                    >
-                        &gt;
-          </Button>
-                    <Button
-                        variant="outlined"
-                        size="small"
-                        className={classes.button}
-                        onClick={handleCheckedLeft}
-                        disabled={rightChecked.length === 0}
-                        aria-label="move selected left"
-                    >
-                        &lt;
-          </Button>
-                    <Button
-                        variant="outlined"
-                        size="small"
-                        className={classes.button}
-                        onClick={handleAllLeft}
-                        disabled={right.length === 0}
-                        aria-label="move all left"
-                    >
-                        ≪
-          </Button>
-                </Grid>
-            </Grid>
-            <Grid item>{customList(right)}</Grid>
-        </Grid>
+      <div style={{ marginRight: "15px" }}>
+        <List component="nav">
+          {myData.map(each => (
+            <React.Fragment key={each.id}>
+              <ListItem button onClick={() => handleClick(each.id)}>
+                <ListItemText inset primary={each.nameHeader} />
+                {settings.find(item => item.id === each.id).open
+                  ? "expanded"
+                  : "collapsed"}
+              </ListItem>
+              <Divider />
+              <Collapse
+                in={settings.find(item => item.id === each.id).open}
+                timeout="auto"
+                unmountOnExit
+              >
+                <List component="div" disablePadding>
+                  {each.subMenu.map(subData => (
+                    <ListItem key={subData.id} button>
+                      <ListItemText inset primary={subData.name} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Collapse>
+            </React.Fragment>
+          ))}
+        </List>
+      </div>
     );
+  
 }
+export default CollapseBTN

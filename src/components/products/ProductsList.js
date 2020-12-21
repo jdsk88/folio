@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,15 +13,18 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { useStyles } from "./useStyles.1";
-
+import { useStyles } from "./styles_products";
 
 export const ProductsList = ({ products }) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
+
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
+        console.log(expanded)
     };
+
     return (
         <div>
             {products.map((product) => (
@@ -38,7 +41,7 @@ export const ProductsList = ({ products }) => {
                         subheader={product.price} />
                     <CardMedia
                         className={classes.media}
-                        image={product.images[0]}
+                        image={product.images}
                         title={product.name} />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
@@ -56,7 +59,8 @@ export const ProductsList = ({ products }) => {
                             className={clsx(classes.expand, {
                                 [classes.expandOpen]: expanded,
                             })}
-                            onClick={handleExpandClick}
+                            onClick={(e) => handleExpandClick(e.currentTarget)}
+                            // onClick={handleExpandClick}
                             aria-expanded={expanded}
                             aria-label="show more"
                         >
