@@ -157,6 +157,11 @@ export default function Dashboard() {
                 <Counter />
               </Paper>
             </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+
+              </Paper>
+            </Grid>
         </Container>
       </main>
     </div>
