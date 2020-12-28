@@ -21,9 +21,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Brightness = () => {
+
     const API_URL = "http://localhost:8888/api"
     const classes = useStyles();
-    const [brightness, setBrightness] = useState(0)
+    
+    const [getBrightness, getSetBrightness] = useState()
+    const [brightness, setBrightness] = useState({getBrightness})
+    // console.log("brightness from hook " + getBrightness)
+    useEffect(() => {
+        axios.get(API_URL + '/settings/5fe1be5ca18b082c28bee676')  
+        .then(res => {
+            const settings = res.data;
+            const brightness = settings;
+            const setBrightness = brightness.brightness;
+            getSetBrightness(setBrightness);
+            console.log("set lcd backlight level :  " + setBrightness)
+          },[setBrightness]);
+    })
+    const parseValue = parseInt(getBrightness)
+    console.log("parseValue " + parseValue)
+    
+    
     
     
     useEffect(() => {
@@ -62,7 +80,8 @@ export const Brightness = () => {
         <div className={classes.root}>
             <Typography>Screen Brigtness Controller</Typography>
             <Slider
-                // defaultValue={}
+                key={`slider-${getBrightness}`}
+                defaultValue={getBrightness}
                 // getAriaValueText={valuetext}
                 brightness={brightness}
                 setBrightness={setBrightness}
