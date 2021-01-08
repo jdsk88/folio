@@ -10,6 +10,7 @@ import { Products } from "./components/products/index";
 import { DrugsStore } from "./components/drugs/index-old";
 import {Drugs} from "./components/drugs/index";
 import {Brightness} from "./components/settings/index"
+import {Email} from "./components/email/index"
 const App = () => {
   return (
     <div className="App">
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/rxdrugs" component={Drugs} />
           <Route path="/rxdrugs" component={Drugs} />
           <Route path="/settings" component={Brightness} />
+          <Route path="/email" component={Email} />
         </Switch>
         <LabelBottomNavigation />
       </Router>

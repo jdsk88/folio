@@ -68,11 +68,7 @@ export const Brightness = () => {
             .then(data => {
               console.log(data); // JSON data parsed by `data.json()` call
             });
-        // axios.put(API_URL + '/settings/5fe1be5ca18b082c28bee676', {brightness: brightness,})
-        // .then(res => {
-        //   console.log(res);
-        //   console.log(res.data);
-        // })
+
     },[brightness])
    
 
