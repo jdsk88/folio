@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { Slider } from '@material-ui/core';
 import axios from 'axios';
+import {Server_Clock} from '../small_components/server_clock'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
 
 export const Brightness = () => {
 
-    const API_URL = "http://localhost:8888/api"
+    // const API_URL = "http://localhost:8888/api"
+    const API_URL = "http://192.168.0.16:8888/api"
     const classes = useStyles();
     
     const [getBrightness, getSetBrightness] = useState()
@@ -90,6 +92,7 @@ export const Brightness = () => {
                 min={0}
                 max={255}
             />
+            <Server_Clock/>
         </div>
     );
 }

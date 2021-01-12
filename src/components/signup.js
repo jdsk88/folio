@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,13 +12,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
+import { API_URL } from '../config/constants'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://ister.pl/">
+      iSter interactive studio inc.
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -48,6 +50,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const Register = (e) => {
+    e.preventDefault();
+    Axios.post(`${API_URL}users/register`, {
+      firstName: firstName,
+      lastName: lastName,
+      username: username,
+      email: email,
+      password: password
+    })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -63,6 +80,22 @@ export default function SignUp() {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+                autoComplete="fname"
+                name="username"
+                variant="outlined"
+                required
+                fullWidth
+                id="username"
+                label="User Name"
+                autoFocus
+              />
+              </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -75,6 +108,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+               value={lastName}
+               onChange={(e) => setLastName(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -86,6 +121,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+               value={email}
+               onChange={(e) => setEmail(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -97,6 +134,8 @@ export default function SignUp() {
             </Grid>
             <Grid item xs={12}>
               <TextField
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
                 variant="outlined"
                 required
                 fullWidth
@@ -120,12 +159,13 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={Register}
           >
             Sign Up
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signin" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,13 +12,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
+import { API_URL } from '../config/constants'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="http://ister.pl/">
+        iSter interactive studio inc.
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -46,9 +48,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export const SignIn = () => {
   const classes = useStyles();
-
+  const [emailAddress, setEmailAddress] = useState("");
+  const [passwd, setPasswd] = useState("");
+  const LogIn = (e) => {
+    e.preventDefault();
+    Axios.post(`${API_URL}users/login`, {
+      username: emailAddress,
+      password: passwd
+    })
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -61,6 +71,8 @@ export default function SignIn() {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            value={emailAddress}
+            onChange={(e) => setEmailAddress(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -72,6 +84,8 @@ export default function SignIn() {
             autoFocus
           />
           <TextField
+            value={passwd}
+            onChange={(e) => setPasswd(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -92,6 +106,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={LogIn}
           >
             Sign In
           </Button>

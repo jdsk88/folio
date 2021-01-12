@@ -1,11 +1,11 @@
-// import  createProxyMiddleware from 'http-proxy-middleware';
+import  createProxyMiddleware from 'http-proxy-middleware';
 
-// export const app = () => {
-//   app.use(
-//     '/api',
-//     createProxyMiddleware({
-//       target: 'http://localhost:8888/',
-//       changeOrigin: true,
-//     })
-//   );
-// };
+export const app = () => {
+  app.use(
+    '/api',
+    createProxyMiddleware({
+      target: 'http://localhost:8888/',
+      changeOrigin: true,
+    })
+  );
+};

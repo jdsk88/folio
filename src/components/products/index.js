@@ -27,7 +27,7 @@ export const Products = () => {
     console.log(products)
 
     if (isLoading) {
-        return <Loader />;
+        return <Loader title="Products loading" subtitle="Please wait"/>;
     }
 
     return (

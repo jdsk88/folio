@@ -21,14 +21,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Loader = () => {
+const Loader = (props) => {
     const classes = useStyles();
+    const title = props.title;
+    const subtitle = props.subtitle;
 
     return (
         <div className={classes.root}>
             <CircularProgress className={classes.loader} />
-            <Typography>Products loading</Typography>
-            <Typography>please wait</Typography>
+            <Typography title={title}>{title}</Typography>
+            <Typography subtitle={subtitle}>{subtitle}</Typography>
         </div>
     );
 }
