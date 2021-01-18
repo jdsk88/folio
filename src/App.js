@@ -13,6 +13,7 @@ import {Brightness} from "./components/settings/index"
 import {Email} from "./components/email/index"
 import { EmailForm } from "./components/email/form";
 import { FiltersForm } from "./components/email/filters";
+import { Networks } from "./components/network";
 const App = () => {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/email" component={Email} />
           <Route path="/email_form" component={EmailForm} />
           <Route path="/filters_form" component={FiltersForm} />
+          <Route path="/setup" component={Networks} />
         </Switch>
         {/* <LabelBottomNavigation /> */}
       </Router>

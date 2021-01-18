@@ -97,7 +97,7 @@ export const FiltersForm = () => {
                         key={item._id}
                         VALUE={item.value}
                         ID={item._id}
-                        LABEL={item.from}
+                        LABEL={item.name}
                     // onClick={() => {axios.put(`${API_URL}filters/${item_id}`,{state:)}} 
                     />))}
             </FormGroup>

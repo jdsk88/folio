@@ -51,26 +51,26 @@ export const EmailForm = () => {
         console.log("reloading data")
     }
 
-    // const [value, setValue] = useState([]);
-
-    // const valueChanger = () => {
-    //     fetch(`${API_URL}devices`)
-    //     .then((resp) => resp.json())
-    //     .then((data) => setValue(data)
-    //     )
-    // }
     const [filters, setGetFilter] = useState([]);
 
-    const getFilters = (props) => {
-        const CHECKED = props.CHECKED
+    // const getFilters = (props) => {
+    //     const CHECKED = props.CHECKED
+    //     fetch(`${API_URL}filters`)
+    //         .then((resp) => resp.json())
+    //         .then((data) => setGetFilter(data)
+    //         )
+    //     // valueChanger();
+    //     console.log("filers loading")
+
+    // }
+    useEffect((props) => {
         fetch(`${API_URL}filters`)
             .then((resp) => resp.json())
             .then((data) => setGetFilter(data)
             )
-        // valueChanger();
         console.log("filers loading")
 
-    }
+    },[])
     return (
         <>
 
@@ -91,7 +91,7 @@ export const EmailForm = () => {
             <Nav3Buttons
                 btn_01_label="CREATE"
                 btn_01_link="/email_form"
-                btn_01_onClick={getFilters}
+                // btn_01_onClick={getFilters}
                 btn_02_label="TRANSLATE"
                 // btn_02_link="/email_form"
                 // btn_02_onClick={}
@@ -110,6 +110,10 @@ export const EmailForm = () => {
                         id={item._id}
                         label={item.name}
                         CHECKED={item.value}
+                        ONCLICK={item.onClick}
+                        ONTOUCH={item.onTouch}
+                        LINK={item.link}
+                        INFO={item.info}
                         // ONCLICK={}
                     />))}
             </FormGroup>

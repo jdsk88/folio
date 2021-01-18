@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
 // import FormGroup from '@material-ui/core/FormGroup';
@@ -18,12 +18,15 @@ const ColorBox = withStyles({
 })((props) => <Checkbox color="default" {...props} />);
 
 export const CheckBOX = (props) => {
-    const [state, setState] = React.useState({});
+    const [state, setState] = useState({});
     const LABEL = props.label;
     const ID = props.id;
     const VALUE = props.value;
     const CHECKED = props.CHECKED;
     const ONCLICK = props.ONCLICK;
+    const LINK = props.LINK;
+    const ONTOUCH = props.ONTOUCH;
+    const INFO = props.INFO;
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
@@ -32,26 +35,37 @@ export const CheckBOX = (props) => {
             {
                 name: event.target.name,
                 type: event.target.type,
-                link: event.target.link,
-                onClick: event.target.onClick,
-                onTouch: event.target.onTouch,
+                link: LINK,
+                onClick: ONCLICK,
+                onTouch: ONTOUCH,
                 value: event.target.checked,
-                info: event.target.info
+                info: INFO
             }
         )
     };
-
+    // const [gState, setgState] = useState({})
+    // useEffect(() => {
+    //     fetch(`${API_URL}filters/${ID}`)
+    //         .then((resp) => resp.json())
+    //         .then((data) => setgState(data)
+    //         )
+    //     },[])
+    // console.log(gState)
     return (
         // <FormGroup row>
         <FormControlLabel
             control={<ColorBox
-                checked={state.LABEL}
+                // checked={state}
                 onChange={handleChange}
                 id={ID} />}
             label={LABEL}
             name={LABEL}
             value={VALUE}
-            onClick={ONCLICK}
+            // onClick={ONCLICK}
+            LINK={LINK}
+            ONCLICK={ONCLICK}
+            ONTOUCH={ONTOUCH}
+            INFO={INFO}
         />
         // </FormGroup>
     );
