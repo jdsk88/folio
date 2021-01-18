@@ -5,6 +5,7 @@ import { ProductsList } from "./ProductsList";
 import Loader from "../small_components/loader";
 import { useStyles } from "./styles_categories"
 import Filters from "./toggle2btns";
+import {Button} from "../small_components/button"
 
 export const Products = () => {
     const classes = useStyles();
@@ -35,6 +36,7 @@ export const Products = () => {
             <Categories className={classes.categories} />
             <Filters />
             <ProductsList products={products} />
+            <Button/>
         </div>
     );
 

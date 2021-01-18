@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import CardHeader from '@material-ui/core/CardHeader';
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
     root: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles({
         flexDirection: "column"
     },
 });
-
 export const AcordionCard = (props) => {
     const classes = useStyles();
+    const id = props.id;
+    const delId = props.delId;
     const avatar = props.avatar;
     const image = props.image;
     const image_title = props.image_title;
@@ -34,6 +36,7 @@ export const AcordionCard = (props) => {
 
     return (
         <div className={classes.root}>
+            
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -51,9 +54,10 @@ export const AcordionCard = (props) => {
                         <Typography className={classes.heading}>From: {title}</Typography>
                         <Typography className={classes.heading}>To: {subtitle}</Typography>
                         </div>
+                        <button key={id} onClick={delId}></button>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography color="textPrimary">{content}</Typography>
+                    <Typography className={classes.heading} color="textPrimary">{content}</Typography>
                 </AccordionDetails>
             </Accordion>
         </div>

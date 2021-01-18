@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 import Axios from 'axios';
 import { API_URL } from '../config/constants'
 
-function Copyright() {
+const Copyright = () => {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -50,13 +50,13 @@ const useStyles = makeStyles((theme) => ({
 
 export const SignIn = () => {
   const classes = useStyles();
-  const [emailAddress, setEmailAddress] = useState("");
-  const [passwd, setPasswd] = useState("");
+  const [emailAddress, setEmailAddress] = useState();
+  const [password, setPassword] = useState();
   const LogIn = (e) => {
     e.preventDefault();
     Axios.post(`${API_URL}users/login`, {
       username: emailAddress,
-      password: passwd
+      password: password
     })
   }
   return (
@@ -84,8 +84,8 @@ export const SignIn = () => {
             autoFocus
           />
           <TextField
-            value={passwd}
-            onChange={(e) => setPasswd(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             variant="outlined"
             margin="normal"
             required
@@ -112,12 +112,12 @@ export const SignIn = () => {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/forgot" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

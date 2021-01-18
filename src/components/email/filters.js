@@ -26,50 +26,39 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const EmailForm = () => {
+export const FiltersForm = () => {
 
 
     const classes = useStyles();
-    const [from, setFrom] = useState("");
-    const [to, setTo] = useState("");
-    const [title, setTitle] = useState("");
-    const [letter, setLetter] = useState("");
-    const [toCopy, setToCopy] = useState("");
-    const [toHiddenCopy, setToHiddenCopy] = useState("");
-    const [signature, setSignature] = useState("");
+    const [name, setName] = useState("");
+    const [type, setType] = useState("");
+    const [link, setLink] = useState("");
+    const [onClick, setOnClick] = useState("");
+    const [onTouch, setOnTouch] = useState("");
+    const [value, setValue] = useState("");
+    const [info, setInfo] = useState("");
 
     const sendMsg = async () => {
-        await axios.post(`${API_URL}email`, {
-            from: from,
-            to: to,
-            toCopy: toCopy,
-            toHiddenCopy: toHiddenCopy,
-            title: title,
-            letter: letter,
-            signature: signature,
+        await axios.post(`${API_URL}filters`, {
+            name: name,
+            type: type,
+            link: link,
+            onClick: onClick,
+            onTouch: onTouch,
+            value: value,
+            info: info,
         })
         console.log("reloading data")
     }
 
-    // const [value, setValue] = useState([]);
-
-    // const valueChanger = () => {
-    //     fetch(`${API_URL}devices`)
-    //     .then((resp) => resp.json())
-    //     .then((data) => setValue(data)
-    //     )
-    // }
     const [filters, setGetFilter] = useState([]);
 
-    const getFilters = (props) => {
-        const CHECKED = props.CHECKED
+    const getFilters = () => {
         fetch(`${API_URL}filters`)
             .then((resp) => resp.json())
             .then((data) => setGetFilter(data)
             )
-        // valueChanger();
         console.log("filers loading")
-
     }
     return (
         <>
@@ -106,61 +95,59 @@ export const EmailForm = () => {
                 {filters.map((item) => (
                     <CheckBOX
                         key={item._id}
-                        value={item.value}
-                        id={item._id}
-                        label={item.name}
-                        CHECKED={item.value}
-                        // ONCLICK={}
+                        VALUE={item.value}
+                        ID={item._id}
+                        LABEL={item.from}
+                    // onClick={() => {axios.put(`${API_URL}filters/${item_id}`,{state:)}} 
                     />))}
             </FormGroup>
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                     className={classes.name}
-                    value={from}
-                    onChange={(e) => setFrom(e.target.value)}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     id="outlined-basic"
-                    label="from"
+                    label="name"
                     variant="outlined"
                     required />
                 <TextField
                     className={classes.name}
-                    value={to}
-                    onChange={(e) => setTo(e.target.value)}
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
                     id="outlined-basic"
                     label="to"
                     variant="outlined" />
                 <TextField
-                    value={toCopy}
-                    onChange={(e) => setToCopy(e.target.value)}
+                    value={link}
+                    onChange={(e) => setLink(e.target.value)}
                     id="outlined-basic"
                     label="copy to"
                     variant="outlined" />
                 <TextField
-                    value={toHiddenCopy}
-                    onChange={(e) => setToHiddenCopy(e.target.value)}
+                    value={onClick}
+                    onChange={(e) => setOnClick(e.target.value)}
                     id="outlined-basic"
                     label="copy hidden to"
                     variant="outlined" />
                 <TextField
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={onTouch}
+                    onChange={(e) => setOnTouch(e.target.value)}
                     id="outlined-basic"
                     label="title"
                     variant="outlined" />
                 <TextField
-                    // value={letter}
-                    value={letter}
-                    onChange={(e) => setLetter(filters.value)}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                     id="outlined-basic"
                     label="content message"
                     variant="outlined" />
                 <TextField
-                    value={signature}
-                    onChange={(e) => setSignature(e.target.value)}
+                    value={info}
+                    onChange={(e) => setInfo(e.target.value)}
                     id="outlined-basic"
                     label="signature"
                     variant="outlined" />
-                <Button variant="outlined" color="primary" component={Link} to="/email" onClick={sendMsg}>Send</Button>
+                <Button variant="outlined" color="primary" component={Link} to="/filters" onClick={sendMsg}>Send</Button>
             </form>
         </>
     );

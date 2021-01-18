@@ -6,6 +6,7 @@ import { API_URL } from "../../config/constants";
 import { Geolocation } from "../geolocation";
 import { Nav3Buttons } from "./nav";
 import Axios from "axios";
+import { Button } from "../small_components/button";
 
 export const Email = () => {
     const [emails, setEmails] = useState([]);
@@ -32,29 +33,30 @@ export const Email = () => {
         setReload((state) => !state);
         console.log("reloading data")
     }
-    const DEL = () => {
-        Axios.delete(`${API_URL}/email`)
+    const DEL = async () => {
+        await Axios.delete(`${API_URL}email`)
         setReload((state) => !state);
         console.log("DEL data")
     }
     return (
         <div>
             <Nav3Buttons
-            style={{position:'fixed', top: '64px'}}
-            btn_01_icon="skateboarding"
-            btn_01_label="Inbox"
-            btn_02_label="Outbox"
-            btn_03_label="Priority"
-            btn_04_label="Reload"
-            // btn_01_link={}
-            btn_02_link="/email_form"
-            // btn_03_link={}
-            // btn_01_onClick={}
-            // btn_02_onClick={DEL}
-            btn_03_onClick={DEL}
-            btn_04_onClick={RELOAD}
+                style={{ position: 'fixed', top: '64px' }}
+                btn_01_link="/email"
+                btn_01_label="Inbox"
+                // btn_01_onClick={}
+                btn_02_link="/email_form"
+                btn_02_label="Outbox"
+                // btn_02_onClick={DEL}
+                btn_03_link="/email"
+                btn_03_label="Delete"
+                btn_03_onClick={DEL}
+                btn_04_label="Reload"
+                btn_04_onClick={RELOAD}
             />
-            <EmailsList emails={emails} />
+            <EmailsList key={emails.length} emails={emails} />
+
+
         </div>
     );
 
