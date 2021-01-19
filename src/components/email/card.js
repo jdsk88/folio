@@ -29,6 +29,7 @@ export const EmailCard = (props) => {
     const sign = props.sign;
     const handleExpandClick = () => {
         setExpanded(!expanded);
+
     };
 
     return (
