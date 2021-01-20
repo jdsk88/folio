@@ -6,6 +6,7 @@ import Loader from "../small_components/loader";
 import { useStyles } from "./styles_categories"
 import Filters from "./toggle2btns";
 import {Button} from "../small_components/button"
+import { API_URL } from "../../config/constants";
 
 export const Products = () => {
     const classes = useStyles();
@@ -20,7 +21,7 @@ export const Products = () => {
             name: queryParams.get("name") || '',
         });
         setIsLoading(true);
-        fetch("http://localhost:8888/api/products?limit=1&page=3" + params.toString())
+        fetch(`${API_URL}products?${params.toString()}`)
             .then((resp) => resp.json())
             .then((data) => setProducts(data))
             .finally(() => setIsLoading(false));
