@@ -30,7 +30,7 @@ export const ProductsList = ({ products }) => {
             {products.map((product) => (
                 <Card className={classes.root} key={product._id}>
 
-                    <CardHeader
+                    <CardHeader 
                         avatar={<Avatar aria-label="recipe" className={classes.avatar}>
                             R
               </Avatar>}

@@ -7,7 +7,6 @@ import LabelBottomNavigation from './components/bnav';
 import PrimarySearchAppBar from "./components/appBar";
 import TransferList from "./components/tasks/tasks";
 import { Products } from "./components/products/index";
-import { DrugsStore } from "./components/drugs/index-old";
 import { Drugs } from "./components/drugs/index";
 import { Brightness } from "./components/settings/index"
 import { Email } from "./components/email/index"
@@ -15,6 +14,7 @@ import { EmailForm } from "./components/email/form";
 import { FiltersForm } from "./components/email/filters";
 import { Networks } from "./components/network";
 import { AddProduct } from "./components/products/addProduct";
+import { AddProductRouter } from "./components/products/addProductRoutes";
 export const App = () => {
   return (
     <div className="App">
@@ -29,9 +29,7 @@ export const App = () => {
           <Route path="/tasks" component={TransferList} />
           <Route path="/products" component={Products} />
           <Route path="/add_product" component={AddProduct} />
-          <Route path="/drugs" component={DrugsStore} />
-          <Route path="/rxdrugs" component={Drugs} />
-          <Route path="/rxdrugs" component={Drugs} />
+          <Route path="/drugs" component={Drugs} />
           <Route path="/settings" component={Brightness} />
           <Route path="/email" component={Email} />
           <Route path="/email_form" component={EmailForm} />

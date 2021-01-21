@@ -1,24 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import { API_URL } from '../../config/constants';
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import axios from 'axios';
+import { Publish, GetApp, Save, Edit, DeleteForever } from '@material-ui/icons';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
+import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import IconButton from '@material-ui/core/IconButton';
+import InfoIcon from '@material-ui/icons/Info';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        '& > *': {
-            width: '100%',
-            padding: '10px',
-            paddingLeft: 0,
-        },
-        name: {
-            width: "50%",
-            boxSizing: "border-box",
-        }
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        overflow: 'hidden',
+        backgroundColor: theme.palette.background.paper,
     },
+    gridList: {
+        maxWidth: "100%",
+        height: 450,
+    },
+    icon: {
+        color: 'rgba(255, 255, 255, 0.54)',
+    },
+    gridListItem: {
+        min: 250,
+        height: 450,
+    },
+    root2: {
+        // background:"white",
+        marginBottom: "5px",
+        width: "100%",
+        display: 'flex',
+        position: "sticky",
+        top: "64px",
+        flexDirection: 'column',
+        alignItems: 'center',
+        zIndex: 1,
+    },
+    green: {
+        background: "green",
+    },
+    red: {
+        background: "red",
+    },
+    pink: {
+        background: "pink",
+    },
+    blue: {
+        background: "blue",
+    },
+    lightblue: {
+        background: "lightblue",
+    }
 }));
 
 export const AddProduct = () => {
@@ -33,35 +74,37 @@ export const AddProduct = () => {
     const [bar, setBar] = useState("");
     const [images, setImages] = useState("");
 
-    //
-    let importData;
+    //import data from file and post to server database
+    let importData = [];
     const ImportedData = () => {
         const data = importData.result;
-        setImport_data(data);
         const parsed_data = JSON.parse(data);
-        // console.log(parsed_data)
-        // for(var i in parsed_data){
-        //     console.log(parsed_data[i].name)
-        // }
-        // console.log(data)
-        for (var i in parsed_data) {
+        setImport_data(parsed_data);
+    };
+
+    const ImportedDataSave = () => {
+        for (var i in import_data) {
             axios.post(`${API_URL}products`, {
-                name: parsed_data[i].name,
-                type: parsed_data[i].type,
-                category: parsed_data[i].category,
-                price: parsed_data[i].price,
-                ean: parsed_data[i].ean,
-                bar: parsed_data[i].bar,
-                images: parsed_data[i].images,
+                name: import_data[i].name,
+                type: import_data[i].type,
+                category: import_data[i].category,
+                price: import_data[i].price,
+                ean: import_data[i].ean,
+                bar: import_data[i].bar,
+                images: import_data[i].images,
             })
         }
-    };
+    }
+
+    const DeleteProductsDataBase = () => {
+        axios.delete(`${API_URL}products`)
+    }
+
     const FReader = (file) => {
         importData = new FileReader();
         importData.onloadend = ImportedData;
         importData.readAsText(file);
     };
-
 
     const sendMsg = async () => {
         await axios.post(`${API_URL}products`, {
@@ -76,19 +119,35 @@ export const AddProduct = () => {
         console.log("reloading data")
     }
 
-    return (
-        <>
-            <Button variant="contained" component="label">
-                import data
-                <input
-                    type='file'
-                    id='file'
-                    className='input-file'
-                    accept='.json'
-                    hidden
-                    onChange={(e) => FReader(e.target.files[0])} />
-            </Button>
-            <div>{import_data.length}</div>
+    const Grid = () => {
+        return (
+            
+            <div>{import_data.length} objects found
+            <GridList cellHeight={180} cols={2} rows={3} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                    <ListSubheader component="div"></ListSubheader>
+                </GridListTile>
+                {import_data.map((item) => (
+                    <GridListTile key={item.images} className={classes.gridListItem}>
+                        <img src={item.images} alt={item.name} />
+                        <GridListTileBar
+                            title={item.type}
+                            subtitle={<span>by: {item.price}</span>}
+                            actionIcon={
+                                <IconButton aria-label={`info about ${item.ean}`} className={classes.icon}>
+                                    <InfoIcon />
+                                </IconButton>
+                            }
+                            />
+                    </GridListTile>
+                ))}
+            </GridList>
+                </div>
+            )
+    }
+
+    const ProductForm = () => {
+        return (
             <form className={classes.root} noValidate autoComplete="off">
                 <TextField
                     className={classes.name}
@@ -137,6 +196,46 @@ export const AddProduct = () => {
                     variant="outlined" />
                 <Button variant="outlined" color="primary" component={Link} to="products" onClick={sendMsg}>Send</Button>
             </form>
+        )
+    }
+const Navigation = () => {
+    return (
+        <div className={classes.root2}>
+        <ButtonGroup size="large">
+            <Button variant="contained" className={classes.lightblue} component="label">
+                <Publish /><Typography ></Typography>
+                <input
+                    type='file'
+                    id='file'
+                    className='input-file'
+                    accept='.json'
+                    hidden
+                    onChange={(e) => FReader(e.target.files[0])} />
+            </Button>
+            {/* <Button variant="contained" className={classes.blue}><GetApp /></Button> */}
+            <Button variant="contained" className={classes.pink}><Edit /></Button>
+            <Button variant="contained" className={classes.green} onClick={ImportedDataSave} ><Save /></Button>
+            <Button variant="contained" className={classes.red} onClick={DeleteProductsDataBase}><DeleteForever /></Button>
+        </ButtonGroup>
+    </div >
+    )
+}
+
+
+    return (
+        <>
+
+
+
+          
+            {/* <Router>
+
+            </Router> */}
+<Navigation/>
+<Grid/>
+<ProductForm/>
+
+            
         </>
     );
 }

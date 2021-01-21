@@ -27,6 +27,8 @@ export const CheckBOX = (props) => {
     const LINK = props.LINK;
     const ONTOUCH = props.ONTOUCH;
     const INFO = props.INFO;
+    const ICON = props.ICON;
+    const CHECKED_ICON = props.CHECKED_ICON;
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
@@ -39,7 +41,9 @@ export const CheckBOX = (props) => {
                 onClick: ONCLICK,
                 onTouch: ONTOUCH,
                 value: event.target.checked,
-                info: INFO
+                info: INFO,
+                icon: ICON,
+                checkedIcon: CHECKED_ICON
             }
         )
     };
@@ -66,6 +70,9 @@ export const CheckBOX = (props) => {
             ONCLICK={ONCLICK}
             ONTOUCH={ONTOUCH}
             INFO={INFO}
+            ICON={ICON}
+            icon={ICON}
+            checkedIcon={CHECKED_ICON}
         />
         // </FormGroup>
     );

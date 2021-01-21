@@ -4,7 +4,7 @@ import Categories from "./categories";
 import { ProductsList } from "./ProductsList";
 import Loader from "../small_components/loader";
 import { useStyles } from "./styles_categories"
-import Filters from "./toggle2btns";
+import {ProductsFilters} from "./filters";
 import {Button} from "../small_components/button"
 import { API_URL } from "../../config/constants";
 
@@ -28,16 +28,20 @@ export const Products = () => {
     }, []);
     console.log(products)
 
+    const edit = () => {
+        console.log("item edit")
+    };
+
     if (isLoading) {
         return <Loader title="Products loading" subtitle="Please wait"/>;
     }
 
+
     return (
         <div>
             <Categories className={classes.categories} />
-            <Filters />
+            <ProductsFilters onClick={edit}/>
             <ProductsList products={products} />
-            <Button/>
         </div>
     );
 
