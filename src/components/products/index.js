@@ -7,6 +7,8 @@ import { useStyles } from "./styles_categories"
 import {ProductsFilters} from "./filters";
 import {Button} from "../small_components/button"
 import { API_URL } from "../../config/constants";
+import axios from "axios"
+// import { GeoLocator } from "../geolocation";
 
 export const Products = () => {
     const classes = useStyles();
@@ -36,12 +38,38 @@ export const Products = () => {
         return <Loader title="Products loading" subtitle="Please wait"/>;
     }
 
+// GeoLocator();
+const GeoLocator = () => {
 
+    navigator.geolocation.getCurrentPosition((position) => {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let altitude = position.coords.altitude;
+        let altitudeAccuracy = position.coords.altitudeAccuracy;
+        let heading = position.coords.heading;
+        let speed = position.coords.speed;
+        axios.post(`${API_URL}employers/6011584af3a234673b16e318/localization`,
+            {
+
+                "localization": [{
+                    "timeStamp":new Date(),
+                    "coords": [latitude, longitude]
+                }]
+            }
+        
+        )
+    })
+
+    return (<></>)
+}
     return (
         <div>
             <Categories className={classes.categories} />
             <ProductsFilters onClick={edit}/>
+            <button style={{position:"fixed", top:"50vh", left:'50vw'}} onClick={GeoLocator}> send coords </button>
             <ProductsList products={products} />
+    <p>{}</p>
         </div>
     );
 

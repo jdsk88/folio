@@ -15,11 +15,12 @@ import { FiltersForm } from "./components/email/filters";
 import { Networks } from "./components/network";
 import { AddProduct } from "./components/products/addProduct";
 import { AddProductRouter } from "./components/products/addProductRoutes";
+// import { Provider } from 'react-redux'
+// import {createStore} from './createReduxStore'
+// const store = createStore()
 export const App = () => {
   return (
-    <div className="App">
-      {/* <MenuAppBar/> */}
-      <Router>
+      <Router /*history={history}*/ >
         <PrimarySearchAppBar />
         <Switch>
           <Redirect exact={true} from="/" to="/home" />
@@ -38,7 +39,6 @@ export const App = () => {
         </Switch>
         <LabelBottomNavigation />
       </Router>
-    </div>
   );
 }
 
