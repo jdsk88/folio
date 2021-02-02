@@ -23,6 +23,7 @@
   "theme_color": "#000000",
   "background_color": "black",
   "orientation": "portrait",
+  "required_features": ["geolocation"],
   "kiosk_enabled" : true,
   "kiosk_only" : true
 }
